@@ -12,19 +12,43 @@ public class InputHandler : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
+    public Canvas upgradeOverlay;
+
     public void OnClick(InputAction.CallbackContext context)
     {
         if (!context.started) return;
 
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
 
-        if (!rayHit.collider) return;
-
-        var worldPosition = rayHit.point;
-
-        if (rayHit.collider.gameObject.TryGetComponent<Resource>(out var resource))
+        if (rayHit.collider != null)
         {
-            resource.Farmed(worldPosition);
+            var worldPosition = rayHit.point;
+
+            if (rayHit.collider.gameObject.TryGetComponent<Resource>(out var resource))
+            {
+                upgradeOverlay.gameObject.SetActive(false);
+                resource.Farmed(worldPosition);
+            }
+        }
+        else
+        {
+            upgradeOverlay.gameObject.SetActive(false);
+        }
+    }
+    public void Upgrade(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+
+        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+
+        if (rayHit.collider != null)
+        {
+            var worldPosition = rayHit.point;
+
+            if (rayHit.collider.gameObject.TryGetComponent<Resource>(out var resource))
+            {
+                resource.DisplayUpgradeMenu(worldPosition);
+            }
         }
     }
 }
