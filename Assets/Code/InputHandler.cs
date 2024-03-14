@@ -19,10 +19,12 @@ public class InputHandler : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
 
         if (!rayHit.collider) return;
-        
+
+        var worldPosition = rayHit.point;
+
         if (rayHit.collider.gameObject.TryGetComponent<Resource>(out var resource))
         {
-            resource.Farmed();
+            resource.Farmed(worldPosition);
         }
     }
 }

@@ -19,12 +19,15 @@ public class Resource : MonoBehaviour
 
     public static event ResourceAcquiredEventHandler OnResourceAcquired;
 
-    public void Farmed()
+    public void Farmed(Vector2 position)
     {
         OnResourceAcquired?.Invoke(Type);
         if (HitParticles != null)
         {
-            HitParticles.Play();
+            var TempHitParticles = Instantiate(HitParticles);
+            TempHitParticles.transform.position = position;
+            TempHitParticles.Play();
+            Destroy(TempHitParticles.gameObject, TempHitParticles.main.duration * 2);
         }
     }
 }
