@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
@@ -12,10 +9,12 @@ public class CharacterManager : MonoBehaviour
         CharacterBase.SetActive(false);
     }
 
-    public void CreateNewCharacter(Vector2 position)
+    public void CreateNewCharacter(Vector2 position, Resource resource)
     {
         var NewCharacter = Instantiate(CharacterBase);
         NewCharacter.transform.position = position;
         NewCharacter.SetActive(true);
+        var rcm = NewCharacter.GetComponent<ResourceCharacterManager>();
+        rcm.StartCharacter(resource);
     }
 }

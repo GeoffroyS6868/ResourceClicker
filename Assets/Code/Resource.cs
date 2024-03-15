@@ -48,6 +48,11 @@ public class Resource : MonoBehaviour
         }
     }
 
+    public void ManagerFarmed(int amountFarmed)
+    {
+        OnResourceAcquired?.Invoke(Type, amountFarmed);
+    }
+
     public void DisplayUpgradeMenu(Vector2 position)
     {
         upgradeOverlay.transform.position = position;
@@ -68,7 +73,7 @@ public class Resource : MonoBehaviour
         level += 1;
         gainPerClick += 1;
         actualPrice += level * priceMultiplier;
-        characterManager.CreateNewCharacter(new Vector2 { x = transform.position.x + 0.5f, y = transform.position.y });
+        characterManager.CreateNewCharacter(new Vector2 { x = transform.position.x + 0.5f, y = transform.position.y }, this);
 
         upgradeOverlay.gameObject.SetActive(false);
     }
