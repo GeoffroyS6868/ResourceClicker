@@ -13,9 +13,7 @@ public class ResourceUpgraderOverlay : MonoBehaviour
 
     public void Start()
     {
-        IconOne.gameObject.SetActive(false);
         IconTwo.gameObject.SetActive(false);
-        PriceOne.gameObject.SetActive(false);
         PriceTwo.gameObject.SetActive(false);
     }
 

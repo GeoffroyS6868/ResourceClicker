@@ -5450,6 +5450,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5531,6 +5532,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b4b3c495d5c514c87f3fcb9aa5ad31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 519420031}
 --- !u!1 &574326689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5681,38 +5695,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b70c5b52-7843-4e8f-a95d-46ca75492b9a
     m_ActionName: Gameplay/Upgrade[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 579076578}
-        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
-        m_MethodName: ZoomIn
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d369fa6c-d984-46b4-9d72-daa7a05a40f1
-    m_ActionName: Gameplay/ZoomIn[/Mouse/forwardButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 579076578}
-        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
-        m_MethodName: ZoomOut
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 94eb2d0a-9cbe-4647-8a87-c34431fdc6ca
-    m_ActionName: Gameplay/ZoomOut[/Mouse/backButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -9217,8 +9199,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 607562004}
-  - component: {fileID: 607562005}
   - component: {fileID: 607562007}
+  - component: {fileID: 607562008}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -9241,7 +9223,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &607562005
+--- !u!114 &607562007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607562003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98729690d7ff784bb639be1eeea786b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WorkerBase: {fileID: 1871867212}
+--- !u!114 &607562008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9256,19 +9251,6 @@ MonoBehaviour:
   WoodAmountText: {fileID: 804727853}
   StoneAmountText: {fileID: 9249068}
   upgradeOverlay: {fileID: 587846169}
---- !u!114 &607562007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607562003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a98729690d7ff784bb639be1eeea786b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WorkerBase: {fileID: 1871867212}
 --- !u!1 &655428310
 GameObject:
   m_ObjectHideFlags: 0
