@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OverlayManager : MonoBehaviour
+public class ResourceUpgraderOverlay : MonoBehaviour
 {
     public Image IconOne;
     public Image IconTwo;

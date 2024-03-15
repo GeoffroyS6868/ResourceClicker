@@ -10,7 +10,9 @@ public class Resource : MonoBehaviour
     public enum ResourceType
     {
         WOOD,
-        STONE
+        STONE,
+        PLANK,
+        GOLD
     }
 
     public ResourceType Type;
@@ -34,7 +36,6 @@ public class Resource : MonoBehaviour
     private readonly int priceMultiplier = 50;
 
     public Canvas upgradeOverlay;
-    public CharacterManager characterManager;
 
     public void Farmed(Vector2 position)
     {
@@ -57,7 +58,7 @@ public class Resource : MonoBehaviour
     {
         upgradeOverlay.transform.position = position;
 
-        var overlayManager = upgradeOverlay.GetComponent<OverlayManager>();
+        var overlayManager = upgradeOverlay.GetComponent<ResourceUpgraderOverlay>();
         overlayManager.UpdatePrice(this, Icon, actualPrice);
 
         upgradeOverlay.gameObject.SetActive(true);
@@ -73,7 +74,6 @@ public class Resource : MonoBehaviour
         level += 1;
         gainPerClick += 1;
         actualPrice += level * priceMultiplier;
-        characterManager.CreateNewCharacter(new Vector2 { x = transform.position.x + 0.5f, y = transform.position.y }, this);
 
         upgradeOverlay.gameObject.SetActive(false);
     }
