@@ -32,4 +32,9 @@ public class ButtonClickHandler : MonoBehaviour
     {
         worker = newWorker;
     }
+
+    public void OnSell()
+    {
+        resource.Sell();
+    }
 }

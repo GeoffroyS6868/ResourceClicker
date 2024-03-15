@@ -27,6 +27,10 @@ public class Resource : MonoBehaviour
 
     public static event ResourceUpgradedEventHandler OnResourceUpgraded;
 
+    public delegate void ResourceSoldEventHandler(ResourceType type);
+
+    public static event ResourceSoldEventHandler OnResourceSold;
+
     public Texture2D Icon;
 
     private int level = 0;
@@ -76,6 +80,11 @@ public class Resource : MonoBehaviour
         actualPrice += level * priceMultiplier;
 
         upgradeOverlay.gameObject.SetActive(false);
+    }
+
+    public void Sell()
+    {
+        OnResourceSold?.Invoke(Type);
     }
 
 }

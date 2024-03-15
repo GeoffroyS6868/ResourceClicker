@@ -7,9 +7,11 @@ public class ResourceManager : MonoBehaviour
 {
     private int woodAmount = 0;
     private int stoneAmount = 0;
+    private int goldAmount = 0;
 
     public Text WoodAmountText;
     public Text StoneAmountText;
+    public Text GoldAmountText;
 
     public Canvas upgradeOverlay;
 
@@ -17,6 +19,7 @@ public class ResourceManager : MonoBehaviour
     {
         Resource.OnResourceAcquired += HandleResourceAcquired;
         Resource.OnResourceUpgraded += UpgradeResource;
+        Resource.OnResourceSold += SellResource;
         upgradeOverlay.gameObject.SetActive(false);
     }
 
@@ -58,10 +61,33 @@ public class ResourceManager : MonoBehaviour
         return bought;
     }
 
+    public void SellResource(Resource.ResourceType type)
+    {
+        switch (type)
+        {
+            case Resource.ResourceType.WOOD:
+                if (woodAmount >= 1)
+                {
+                    woodAmount -= 1;
+                    goldAmount += 5;
+                }
+                break;
+            case Resource.ResourceType.STONE:
+                if (stoneAmount >= 1)
+                {
+                    stoneAmount -= 1;
+                    goldAmount += 10;
+                }
+                break;
+        }
+        UpdateHUD();
+    }
+
     private void UpdateHUD()
     {
         WoodAmountText.text = woodAmount.ToString("0");
         StoneAmountText.text = stoneAmount.ToString("0");
+        GoldAmountText.text = goldAmount.ToString("0");
     }
 
     private void OnDestroy()
