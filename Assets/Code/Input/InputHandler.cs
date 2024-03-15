@@ -7,13 +7,12 @@ using UnityEngine.UI;
 public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
+    public Canvas upgradeOverlay;
 
     private void Awake()
     {
         _mainCamera = Camera.main;
     }
-
-    public Canvas upgradeOverlay;
 
     public void OnClick(InputAction.CallbackContext context)
     {
