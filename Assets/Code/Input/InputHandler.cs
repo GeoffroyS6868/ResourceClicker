@@ -8,6 +8,7 @@ public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
     public Canvas upgradeOverlay;
+    public Canvas workerOverlay;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class InputHandler : MonoBehaviour
         else
         {
             upgradeOverlay.gameObject.SetActive(false);
+            workerOverlay.gameObject.SetActive(false);
         }
     }
     public void Upgrade(InputAction.CallbackContext context)
@@ -48,6 +50,9 @@ public class InputHandler : MonoBehaviour
             if (rayHit.collider.gameObject.TryGetComponent<Resource>(out var resource))
             {
                 resource.DisplayUpgradeMenu(worldPosition);
+            } else if (rayHit.collider.gameObject.TryGetComponent<Worker>(out var worker))
+            {
+                worker.DisplayOverlay(worldPosition);
             }
         }
     }

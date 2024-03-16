@@ -7,6 +7,7 @@ public class ResourceManager : MonoBehaviour
 {
     private int woodAmount = 0;
     private int stoneAmount = 0;
+    private int plankAmount = 0;
     private int goldAmount = 0;
 
     public Text WoodAmountText;
@@ -37,7 +38,7 @@ public class ResourceManager : MonoBehaviour
         UpdateHUD();
     }
 
-    private bool UpgradeResource(Resource.ResourceType type, int price)
+    public bool UpgradeResource(Resource.ResourceType type, int price)
     {
         var bought = false;
         switch (type)
@@ -53,6 +54,20 @@ public class ResourceManager : MonoBehaviour
                 if (stoneAmount >= price)
                 {
                     stoneAmount -= price;
+                    bought = true;
+                }
+                break;
+            case Resource.ResourceType.PLANK:
+                if (plankAmount >= price)
+                {
+                    plankAmount -= price;
+                    bought = true;
+                }
+                break;
+            case Resource.ResourceType.GOLD:
+                if (goldAmount >= price)
+                {
+                    goldAmount -= price;
                     bought = true;
                 }
                 break;

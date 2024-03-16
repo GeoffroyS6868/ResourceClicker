@@ -41,6 +41,8 @@ public class Resource : MonoBehaviour
 
     public Canvas upgradeOverlay;
 
+    public Worker worker;
+
     public void Farmed(Vector2 position)
     {
         OnResourceAcquired?.Invoke(Type, gainPerClick);

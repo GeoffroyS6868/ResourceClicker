@@ -10,16 +10,16 @@ public static class Utilities
         switch (resourceType)
         {
             case Resource.ResourceType.WOOD:
-                path += "Wood";
+                path += "Wood.png";
                 break;
             case Resource.ResourceType.STONE:
-                path += "Stone";
+                path += "Stone.png";
                 break;
             case Resource.ResourceType.PLANK:
-                path += "Plank";
+                path += "Plank.png";
                 break;
             case Resource.ResourceType.GOLD:
-                path += "Gold";
+                path += "Gold.png";
                 break;
         }
         return AssetDatabase.LoadAssetAtPath<Texture2D>(path);

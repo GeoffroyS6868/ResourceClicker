@@ -5,17 +5,36 @@ using UnityEngine.UI;
 
 public class WorkerOverlay : MonoBehaviour
 {
-    public Texture2D ResourceIcon;
     public Image IconOne;
     public Text PriceText;
+    public Text LevelText;
+    public ResourceManager ResourceManager;
 
-    public void UpdateOverlay(int amount, Resource.ResourceType resourceType)
+    private Resource.ResourceType resourceType;
+    private int price;
+    private Worker worker;
+
+    public void UpdateOverlay(int newPrice, Resource.ResourceType newResourceType, int level, Worker newWorker)
     {
-        ResourceIcon = Utilities.GetIconFromResourceType(resourceType);
+        resourceType = newResourceType;
+        price = newPrice;
+        worker = newWorker;
 
-        Sprite sprite = Sprite.Create(ResourceIcon, new Rect(0, 0, ResourceIcon.width, ResourceIcon.height), Vector2.zero);
+        Texture2D texture = Utilities.GetIconFromResourceType(resourceType);
+
+        Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
         IconOne.sprite = sprite;
 
-        PriceText.text = amount.ToString("0");
+        PriceText.text = newPrice.ToString("0");
+        LevelText.text = level.ToString("0");
+    }
+
+    public void Hire()
+    {
+        if (ResourceManager.UpgradeResource(Resource.ResourceType.GOLD, price) == true)
+        {
+            worker.Hire();
+            return;
+        }
     }
 }
