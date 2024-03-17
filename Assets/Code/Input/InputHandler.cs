@@ -9,10 +9,16 @@ public class InputHandler : MonoBehaviour
     private Camera _mainCamera;
     public Canvas upgradeOverlay;
     public Canvas workerOverlay;
+    public Canvas bankOverlay;
 
     private void Awake()
     {
         _mainCamera = Camera.main;
+    }
+
+    public void Start()
+    {
+        bankOverlay.gameObject.SetActive(false);
     }
 
     public void OnClick(InputAction.CallbackContext context)
@@ -35,6 +41,7 @@ public class InputHandler : MonoBehaviour
         {
             upgradeOverlay.gameObject.SetActive(false);
             workerOverlay.gameObject.SetActive(false);
+            bankOverlay.gameObject.SetActive(false);
         }
     }
     public void Upgrade(InputAction.CallbackContext context)
@@ -53,6 +60,9 @@ public class InputHandler : MonoBehaviour
             } else if (rayHit.collider.gameObject.TryGetComponent<Worker>(out var worker))
             {
                 worker.DisplayOverlay(worldPosition);
+            } else if (rayHit.collider.gameObject.TryGetComponent<Bank>(out var bank))
+            {
+                bank.DisplayOverlay(worldPosition);
             }
         }
     }

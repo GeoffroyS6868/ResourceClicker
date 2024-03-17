@@ -31,7 +31,7 @@ public class WorkerOverlay : MonoBehaviour
 
     public void Hire()
     {
-        if (ResourceManager.UpgradeResource(Resource.ResourceType.GOLD, price) == true)
+        if (ResourceManager.Buy(Resource.ResourceType.GOLD, price) == true)
         {
             worker.Hire();
             return;

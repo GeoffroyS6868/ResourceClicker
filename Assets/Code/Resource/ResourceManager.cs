@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class ResourceManager : MonoBehaviour
 
     public Text WoodAmountText;
     public Text StoneAmountText;
+    public Text PlankAmountText;
     public Text GoldAmountText;
 
     public Canvas upgradeOverlay;
@@ -19,26 +21,55 @@ public class ResourceManager : MonoBehaviour
     private void Start()
     {
         Resource.OnResourceAcquired += HandleResourceAcquired;
-        Resource.OnResourceUpgraded += UpgradeResource;
-        Resource.OnResourceSold += SellResource;
+        Resource.OnResourceUpgraded += Buy;
         upgradeOverlay.gameObject.SetActive(false);
     }
 
-    private void HandleResourceAcquired(Resource.ResourceType type, int gainPerClick)
+    private bool HandleResourceAcquired(Resource.ResourceType type, int gainPerClick)
     {
+        var farmed = false;
         switch (type)
         {
             case Resource.ResourceType.WOOD:
                 woodAmount += gainPerClick;
+                farmed = true;
                 break;
             case Resource.ResourceType.STONE:
                 stoneAmount += gainPerClick;
+                farmed = true;
+                break;
+            case Resource.ResourceType.PLANK:
+                if (woodAmount >= gainPerClick * 2)
+                {
+                    woodAmount -= (gainPerClick * 2);
+                    plankAmount += gainPerClick;
+                    farmed = true;
+                }
                 break;
         }
         UpdateHUD();
+        return farmed;
     }
 
-    public bool UpgradeResource(Resource.ResourceType type, int price)
+    public int GetResourceAmount(Resource.ResourceType type)
+    {
+        switch (type)
+        {
+            case Resource.ResourceType.WOOD:
+                return woodAmount;
+            case Resource.ResourceType.STONE:
+                return stoneAmount;
+            case Resource.ResourceType.PLANK:
+                return plankAmount;
+            case Resource.ResourceType.GOLD:
+                return goldAmount;
+            default:
+                break;
+        }
+        return 0;
+    }
+
+    public bool Buy(Resource.ResourceType type, int price)
     {
         var bought = false;
         switch (type)
@@ -76,22 +107,29 @@ public class ResourceManager : MonoBehaviour
         return bought;
     }
 
-    public void SellResource(Resource.ResourceType type)
+    public void SellResource(Resource.ResourceType type, int amount)
     {
         switch (type)
         {
             case Resource.ResourceType.WOOD:
-                if (woodAmount >= 1)
+                if (woodAmount >= amount)
                 {
-                    woodAmount -= 1;
-                    goldAmount += 5;
+                    woodAmount -= amount;
+                    goldAmount += (5 * amount);
                 }
                 break;
             case Resource.ResourceType.STONE:
-                if (stoneAmount >= 1)
+                if (stoneAmount >= amount)
                 {
-                    stoneAmount -= 1;
-                    goldAmount += 10;
+                    stoneAmount -= amount;
+                    goldAmount += (5 * amount);
+                }
+                break;
+            case Resource.ResourceType.PLANK:
+                if (plankAmount >= amount)
+                {
+                    plankAmount -= amount;
+                    goldAmount += (15 * amount);
                 }
                 break;
         }
@@ -102,6 +140,7 @@ public class ResourceManager : MonoBehaviour
     {
         WoodAmountText.text = woodAmount.ToString("0");
         StoneAmountText.text = stoneAmount.ToString("0");
+        PlankAmountText.text = plankAmount.ToString("0");
         GoldAmountText.text = goldAmount.ToString("0");
     }
 

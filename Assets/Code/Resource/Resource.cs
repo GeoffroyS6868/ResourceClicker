@@ -19,17 +19,13 @@ public class Resource : MonoBehaviour
 
     public ParticleSystem HitParticles;
 
-    public delegate void ResourceAcquiredEventHandler(ResourceType type, int gainPerClick);
+    public delegate bool ResourceAcquiredEventHandler(ResourceType type, int gainPerClick);
 
     public static event ResourceAcquiredEventHandler OnResourceAcquired;
 
     public delegate bool ResourceUpgradedEventHandler(ResourceType type, int price);
 
     public static event ResourceUpgradedEventHandler OnResourceUpgraded;
-
-    public delegate void ResourceSoldEventHandler(ResourceType type);
-
-    public static event ResourceSoldEventHandler OnResourceSold;
 
     public Texture2D Icon;
 
@@ -45,13 +41,15 @@ public class Resource : MonoBehaviour
 
     public void Farmed(Vector2 position)
     {
-        OnResourceAcquired?.Invoke(Type, gainPerClick);
-        if (HitParticles != null)
+        if (OnResourceAcquired?.Invoke(Type, gainPerClick) == true)
         {
-            var TempHitParticles = Instantiate(HitParticles);
-            TempHitParticles.transform.position = position;
-            TempHitParticles.Play();
-            Destroy(TempHitParticles.gameObject, TempHitParticles.main.duration * 1.1f);
+            if (HitParticles != null)
+            {
+                var TempHitParticles = Instantiate(HitParticles);
+                TempHitParticles.transform.position = position;
+                TempHitParticles.Play();
+                Destroy(TempHitParticles.gameObject, TempHitParticles.main.duration * 1.1f);
+            }
         }
     }
 
@@ -83,10 +81,4 @@ public class Resource : MonoBehaviour
 
         upgradeOverlay.gameObject.SetActive(false);
     }
-
-    public void Sell()
-    {
-        OnResourceSold?.Invoke(Type);
-    }
-
 }

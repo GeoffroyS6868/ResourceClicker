@@ -20,7 +20,6 @@ public class Worker : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         int randomNumber = Random.Range(0, 2);
-        Debug.Log(randomNumber);
         resourceType = (Resource.ResourceType)randomNumber;
         level = Random.Range(1, 5);
         price = level * 50;
