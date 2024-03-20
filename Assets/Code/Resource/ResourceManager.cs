@@ -10,11 +10,13 @@ public class ResourceManager : MonoBehaviour
     private int stoneAmount = 0;
     private int plankAmount = 0;
     private int goldAmount = 0;
+    private int refinedOreAmount = 0;
 
     public Text WoodAmountText;
     public Text StoneAmountText;
     public Text PlankAmountText;
     public Text GoldAmountText;
+    public Text RefinedOreAmountText;
 
     public Canvas upgradeOverlay;
 
@@ -46,6 +48,14 @@ public class ResourceManager : MonoBehaviour
                     farmed = true;
                 }
                 break;
+            case Resource.ResourceType.REFINED_ORE:
+                if (stoneAmount >= 2 * gainPerClick) // Ici, je suppose que 3 unités de pierre donnent 1 minerai raffiné
+                {
+                    stoneAmount -= 2 * gainPerClick; // Consomme de la pierre pour créer du minerai raffiné
+                    refinedOreAmount += gainPerClick; // Ajoutez la logique pour déterminer la quantité de minerai ajouté
+                    farmed = true;
+                }
+            break;
         }
         UpdateHUD();
         return farmed;
@@ -63,6 +73,8 @@ public class ResourceManager : MonoBehaviour
                 return plankAmount;
             case Resource.ResourceType.GOLD:
                 return goldAmount;
+            case Resource.ResourceType.REFINED_ORE:
+                return refinedOreAmount;
             default:
                 break;
         }
@@ -107,6 +119,7 @@ public class ResourceManager : MonoBehaviour
         return bought;
     }
 
+
     public void SellResource(Resource.ResourceType type, int amount)
     {
         switch (type)
@@ -132,6 +145,13 @@ public class ResourceManager : MonoBehaviour
                     goldAmount += (15 * amount);
                 }
                 break;
+            case Resource.ResourceType.REFINED_ORE:
+                if (refinedOreAmount >= amount)
+                {
+                    refinedOreAmount -= amount;
+                    goldAmount += (15 * amount); 
+                }
+                break;
         }
         UpdateHUD();
     }
@@ -142,6 +162,7 @@ public class ResourceManager : MonoBehaviour
         StoneAmountText.text = stoneAmount.ToString("0");
         PlankAmountText.text = plankAmount.ToString("0");
         GoldAmountText.text = goldAmount.ToString("0");
+        RefinedOreAmountText.text = refinedOreAmount.ToString("0");
     }
 
     private void OnDestroy()

@@ -36,6 +36,12 @@ public class BankOverlay : MonoBehaviour
         UpdateGoldReceive();
     }
 
+    public void SetRefinedOreType()
+    {
+    resourceType = Resource.ResourceType.REFINED_ORE;
+    UpdateGoldReceive();
+    }
+
     public void SetDividerQuarter()
     {
         divider = 4;
@@ -58,7 +64,7 @@ public class BankOverlay : MonoBehaviour
     {
         var resourceAmount = ResourceManager.GetResourceAmount(resourceType);
         int amountToSell = resourceAmount / divider;
-        if (resourceType == Resource.ResourceType.PLANK)
+        if (resourceType == Resource.ResourceType.PLANK || resourceType == Resource.ResourceType.REFINED_ORE)
         {
             amountToSell *= 15;
         }

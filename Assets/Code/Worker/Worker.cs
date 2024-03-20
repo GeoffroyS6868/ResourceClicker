@@ -22,7 +22,7 @@ public class Worker : MonoBehaviour
         int randomNumber = Random.Range(0, 2);
         resourceType = (Resource.ResourceType)randomNumber;
         level = Random.Range(1, 5);
-        price = level * 50;
+        price = level * 150;
     }
 
     private void FixedUpdate()

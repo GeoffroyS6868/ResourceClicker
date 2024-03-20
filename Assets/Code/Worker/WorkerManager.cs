@@ -6,6 +6,7 @@ public class WorkerManager : MonoBehaviour
     public GameObject WorkerBase;
     public Canvas WorkerOverlay;
     private ResourceManager resourceManager;
+    public int workersBought = 0;
 
     public void Start()
     {

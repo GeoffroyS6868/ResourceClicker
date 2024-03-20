@@ -12,7 +12,8 @@ public class Resource : MonoBehaviour
         WOOD,
         STONE,
         PLANK,
-        GOLD
+        GOLD,
+        REFINED_ORE
     }
 
     public ResourceType Type;
