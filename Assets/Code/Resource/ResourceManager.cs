@@ -9,7 +9,7 @@ public class ResourceManager : MonoBehaviour
     private int woodAmount = 0;
     private int stoneAmount = 0;
     private int plankAmount = 0;
-    private int goldAmount = 1000;
+    private int goldAmount = 0;
     private int refinedOreAmount = 0;
 
     public Text WoodAmountText;

@@ -21,6 +21,9 @@ public static class Utilities
             case Resource.ResourceType.GOLD:
                 path += "Gold.png";
                 break;
+            case Resource.ResourceType.REFINED_ORE:
+                path += "Minerals.png";
+                break;
         }
         return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
     }
