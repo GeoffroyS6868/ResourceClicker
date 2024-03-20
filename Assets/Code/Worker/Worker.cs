@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Worker : MonoBehaviour
@@ -19,7 +20,7 @@ public class Worker : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        int randomNumber = Random.Range(0, 2);
+        int randomNumber = Random.Range(0, 4);
         resourceType = (Resource.ResourceType)randomNumber;
         level = Random.Range(1, 5);
         price = level * 150;
@@ -51,13 +52,9 @@ public class Worker : MonoBehaviour
         {
             if (foundResource.Type == resourceType)
             {
-                if (foundResource.worker != null)
-                {
-                    Destroy(foundResource.worker.gameObject);
-                }
                 resourceManaged = foundResource;
                 transform.position = new(resourceManaged.transform.position.x - 0.75f, resourceManaged.transform.position.y + 0.25f);
-                foundResource.worker = this;
+                foundResource.worker.Append(this);
                 break;
             }
         }
@@ -66,7 +63,7 @@ public class Worker : MonoBehaviour
 
     public void DisplayOverlay(Vector2 position)
     {
-        if (!isBought)
+        if (!isBought && Overlay != null)
         {
             Overlay.UpdateOverlay(price, resourceType, level, this);
             Overlay.gameObject.SetActive(true);

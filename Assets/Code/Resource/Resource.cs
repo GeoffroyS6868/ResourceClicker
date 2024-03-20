@@ -12,8 +12,8 @@ public class Resource : MonoBehaviour
         WOOD,
         STONE,
         PLANK,
-        GOLD,
-        REFINED_ORE
+        REFINED_ORE,
+        GOLD
     }
 
     public ResourceType Type;
@@ -38,7 +38,7 @@ public class Resource : MonoBehaviour
 
     public Canvas upgradeOverlay;
 
-    public Worker worker;
+    public Worker[] worker;
 
     public void Farmed(Vector2 position)
     {

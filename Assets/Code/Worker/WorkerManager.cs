@@ -31,7 +31,7 @@ public class WorkerManager : MonoBehaviour
         while (true)
         {
             CreateNewCharacter(new Vector2(-25.5f, -4.5f));
-            yield return new WaitForSeconds(Random.Range(3, 5) * 60f);
+            yield return new WaitForSeconds(Random.Range(1, 2) * 60f);
         }
     }
 }
